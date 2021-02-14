@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import * as actions from 'actions';
-
-
+import requireAuth from 'components/requireAuth';
 
 
 class CommentBox extends Component {
   state = { comment: '' };
+
+  
 
   handleChange = event => {
     this.setState({ comment: event.target.value });
@@ -34,9 +35,11 @@ class CommentBox extends Component {
         className = "fetch-comments"
         onClick = {this.props.fetchComments}
         > Fetch Comments</button>
+        {JSON.stringify(this.state.comments)}
       </div>
     );
   }
 }
 
-export default connect(null, actions)(CommentBox);
+
+export default connect(null, actions)(requireAuth(CommentBox));
